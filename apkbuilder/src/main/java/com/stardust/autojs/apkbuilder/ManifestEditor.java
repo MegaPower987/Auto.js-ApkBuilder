@@ -24,6 +24,7 @@ public class ManifestEditor {
     private String mVersionName;
     private String mAppName;
     private String mPackageName;
+    private String adMobAppId;
     private byte[] mManifestData;
 
 
@@ -50,6 +51,11 @@ public class ManifestEditor {
         mPackageName = packageName;
         return this;
     }
+    
+    public void setAdMobAppId(String adMobAppId) {
+        this.adMobAppId = adMobAppId;
+    }
+
 
     public ManifestEditor commit() throws IOException {
         AxmlWriter writer = new MutableAxmlWriter();
@@ -85,6 +91,13 @@ public class ManifestEditor {
         if ("label".equals(attr.name.data) && mAppName != null && attr.value instanceof StringItem) {
             ((StringItem) attr.value).data = mAppName;
             return;
+        }
+        
+        if ("value".equals(attr.name.data) && adMobAppId != null && attr.value instanceof StringItem) {
+            if (((StringItem) attr.value).data.equals("ca-app-pub-3940256099942544~3347511713")) {
+                ((StringItem) attr.value).data = adMobAppId;
+                return;
+            }
         }
     }
 
