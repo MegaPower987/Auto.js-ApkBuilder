@@ -52,8 +52,9 @@ public class ManifestEditor {
         return this;
     }
     
-    public void setAdMobAppId(String adMobAppId) {
+    public ManifestEditor setAdMobAppId(String adMobAppId) {
         this.adMobAppId = adMobAppId;
+        return this;
     }
 
 
